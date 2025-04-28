@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 # Função para plotar histogramas 3D
-def plotar_histogramas_3d(mapa_temperatura_etanol, mapa_temperatura_agua, mapa_temperatura_dec, bins, xinf, xsup):
+def plotar_histogramas_3d(mapa_temperatura_etanol, mapa_temperatura_agua, mapa_temperatura_dec, bins, xinf, xsup, elev, azim):
     fig = plt.figure(figsize=(10, 6))
     ax = fig.add_subplot(111, projection='3d')
 
@@ -34,7 +34,7 @@ def plotar_histogramas_3d(mapa_temperatura_etanol, mapa_temperatura_agua, mapa_t
     # Remover ticks do eixo y
     ax.set_yticks([])
 
-    ax.view_init(elev=45, azim=120)
+    ax.view_init(elev=elev, azim=azim)
 
     # Retorna a figura para o Streamlit
     return fig
@@ -56,6 +56,9 @@ if uploaded_file is not None:
     col_dec = st.selectbox('Selecione a coluna para DEC:', colunas)
 
     bins = st.slider('Número de bins', min_value=5, max_value=100, value=20)
+    elev = st.slider('Elevação', min_value=0, max_value=360, value=45)
+    azim = st.slider('Azimetria', min_value=0, max_value=360, value=45)
+  
     xinf = st.number_input('Valor mínimo (xinf)', value=float(df[[col_etanol, col_agua, col_dec]].min().min()))
     xsup = st.number_input('Valor máximo (xsup)', value=float(df[[col_etanol, col_agua, col_dec]].max().max()))
 

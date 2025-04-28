@@ -91,5 +91,5 @@ if uploaded_file is not None:
             xsup = st.sidebar.number_input('Valor máximo (xsup)', value=float(df[colunas_selecionadas].max().max()), key='xsup_2d')
 
             if st.sidebar.button('Gerar Histograma 2D'):
-                fig = plotar_histogramas_2d(df, colunas_selecionadas, bins, xinf, xsup)
+                fig = plotar_histogramas_2d(df, colunas_selecionadas, bins, xinf, xsup, alpha)
                 st.pyplot(fig)

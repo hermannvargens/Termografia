@@ -51,9 +51,9 @@ if uploaded_file is not None:
 
     # Selecione as colunas no sidebar
     colunas = df.columns.tolist()
-    col_etanol = st.sidebar.selectbox('Selecione a coluna para Etanol:', colunas)
-    col_agua = st.sidebar.selectbox('Selecione a coluna para Água:', colunas)
-    col_dec = st.sidebar.selectbox('Selecione a coluna para DEC:', colunas)
+    col1 = st.sidebar.selectbox('Selecione a primeira coluna:', colunas)
+    col2 = st.sidebar.selectbox('Selecione a segunda coluna:', colunas)
+    col3 = st.sidebar.selectbox('Selecione a terceira coluna:', colunas)
 
     # Ajuste dos parâmetros no sidebar
     bins = st.sidebar.number_input('Número de bins', min_value=5, max_value=100, value=20)
@@ -66,5 +66,5 @@ if uploaded_file is not None:
     largura_barra = st.sidebar.number_input('Largura da Barra', min_value=0.0, max_value=1.0, value=0.5)
 
     if st.sidebar.button('Gerar Histograma 3D'):
-        fig = plotar_histogramas_3d(df[col_etanol], df[col_agua], df[col_dec], bins, xinf, xsup, elev, azim, largura_barra)
+        fig = plotar_histogramas_3d(df[col1], df[col2], df[col3], bins, xinf, xsup, elev, azim, largura_barra)
         st.pyplot(fig)

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 # Função para plotar histogramas 3D
-def plotar_histogramas_3d(mapa_temperatura_etanol, mapa_temperatura_agua, mapa_temperatura_dec, bins, xinf, xsup, elev, azim):
+def plotar_histogramas_3d(mapa_temperatura_etanol, mapa_temperatura_agua, mapa_temperatura_dec, bins, xinf, xsup, elev, azim, largura_barra):
     fig = plt.figure(figsize=(10, 6))
     ax = fig.add_subplot(111, projection='3d')
 
@@ -15,7 +15,7 @@ def plotar_histogramas_3d(mapa_temperatura_etanol, mapa_temperatura_agua, mapa_t
     n_dec, bins_dec = np.histogram(mapa_temperatura_dec, bins=bins, range=(xinf, xsup))
 
     # Definindo a largura das barras
-    width = (bins_etanol[1] - bins_etanol[0])/5
+    width = (bins_etanol[1] - bins_etanol[0])/largura_barra
     x_etanol = bins_etanol[:-1] + width / 2
     x_agua = bins_agua[:-1] + width / 2
     x_dec = bins_dec[:-1] + width / 2
@@ -62,6 +62,8 @@ if uploaded_file is not None:
     xinf = st.number_input('Valor mínimo (xinf)', value=float(df[[col_etanol, col_agua, col_dec]].min().min()))
     xsup = st.number_input('Valor máximo (xsup)', value=float(df[[col_etanol, col_agua, col_dec]].max().max()))
 
+    largura_barra = st.number_input('Largura da Barra', min_value=0, max_value=1, value=0.5)
+
     if st.button('Gerar Histograma 3D'):
-        fig = plotar_histogramas_3d(df[col_etanol], df[col_agua], df[col_dec], bins, xinf, xsup, elev, azim)
+        fig = plotar_histogramas_3d(df[col_etanol], df[col_agua], df[col_dec], bins, xinf, xsup, elev, azim, largura_barra)
         st.pyplot(fig)

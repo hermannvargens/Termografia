@@ -21,9 +21,9 @@ def plotar_histogramas_3d(mapa1, mapa2, mapa3, bins, xinf, xsup, elev, azim, lar
     x_col3 = bins_col3[:-1] + width / 2
 
     # Plota os histogramas 3D
-    ax.bar3d(x_col1, np.zeros_like(x_col1), np.zeros_like(x_col1), width*comprimento_barra, width, n_col1, color='blue', edgecolor='black', alpha=alpha, label=col1)
-    ax.bar3d(x_col2, np.ones_like(x_col2), np.zeros_like(x_col2), width*comprimento_barra, width, n_col2, color='yellow', edgecolor='black', alpha=alpha, label=col2)
-    ax.bar3d(x_col3, np.full_like(x_col3, 2), np.zeros_like(x_col3), width*comprimento_barra, width, n_col3, color='red', edgecolor='black', alpha=alpha, label=col3)
+    ax.bar3d(x_col1, np.zeros_like(x_col1), np.zeros_like(x_col1), width*comprimento_barra, width, n_col1, color='blue', edgecolor=None, alpha=alpha, label=col1)
+    ax.bar3d(x_col2, np.ones_like(x_col2), np.zeros_like(x_col2), width*comprimento_barra, width, n_col2, color='yellow', edgecolor=None, alpha=alpha, label=col2)
+    ax.bar3d(x_col3, np.full_like(x_col3, 2), np.zeros_like(x_col3), width*comprimento_barra, width, n_col3, color='red', edgecolor=None, alpha=alpha, label=col3)
 
     # Etiquetas
     ax.set_xlabel('Temperatura')

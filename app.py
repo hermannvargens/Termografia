@@ -18,9 +18,9 @@ def plotar_histogramas_3d(mapa1, mapa2, mapa3, bins, xinf, xsup, elev, azim, lar
     x_col2 = bins_col2[:-1] + width / 2
     x_col3 = bins_col3[:-1] + width / 2
 
-    ax.bar3d(x_col1, np.zeros_like(x_col1), np.zeros_like(x_col1), width*comprimento_barra, width, n_col1, color='blue', edgecolor=None, alpha=alpha1, label=col1)
-    ax.bar3d(x_col2, np.ones_like(x_col2), np.zeros_like(x_col2), width*comprimento_barra, width, n_col2, color='yellow', edgecolor=None, alpha=alpha2, label=col2)
-    ax.bar3d(x_col3, np.full_like(x_col3, 2), np.zeros_like(x_col3), width*comprimento_barra, width, n_col3, color='red', edgecolor=None, alpha=alpha3, label=col3)
+    ax.bar3d(x_col1, np.zeros_like(x_col1), np.zeros_like(x_col1), width*comprimento_barra, width, n_col1, color='blue', edgecolor="black" if usar_edgecolor else None, alpha=alpha1, label=col1)
+    ax.bar3d(x_col2, np.ones_like(x_col2), np.zeros_like(x_col2), width*comprimento_barra, width, n_col2, color='yellow', edgecolor="black" if usar_edgecolor else None, alpha=alpha2, label=col2)
+    ax.bar3d(x_col3, np.full_like(x_col3, 2), np.zeros_like(x_col3), width*comprimento_barra, width, n_col3, color='red', edgecolor="black" if usar_edgecolor else None, alpha=alpha3, label=col3)
 
     ax.set_xlabel('Temperatura')
     ax.set_zlabel('Frequência')
@@ -74,6 +74,7 @@ if uploaded_file is not None:
         alpha1 = st.sidebar.number_input('Alpha 1', min_value=0.0, max_value=1.0, value=0.5, key='alpha1')
         alpha2 = st.sidebar.number_input('Alpha 2', min_value=0.0, max_value=1.0, value=0.5, key='alpha2')
         alpha3 = st.sidebar.number_input('Alpha 3', min_value=0.0, max_value=1.0, value=0.5, key='alpha3')
+        usar_edgecolor = st.sidebar.checkbox('Borda', value=True)
 
         if st.sidebar.button('Gerar Histograma 3D'):
             fig = plotar_histogramas_3d(df[col1], df[col2], df[col3], bins, xinf, xsup, elev, azim, largura_barra, comprimento_barra, alpha1, alpha2, alpha3, col1, col2, col3)
@@ -85,7 +86,7 @@ if uploaded_file is not None:
         colunas_selecionadas = st.sidebar.multiselect('Selecione as colunas:', colunas)
         bins = st.sidebar.number_input('Número de bins', min_value=5, max_value=100, value=20, key='bins_2d')
         alpha = st.sidebar.number_input('Alpha', min_value=0.0, max_value=1.0, value=0.5, key='alpha')
-        usar_edgecolor = st.sidebar.checkbox('Usar borda nas barras (edgecolor)', value=True)
+        usar_edgecolor = st.sidebar.checkbox('Borda', value=True)
 
         if colunas_selecionadas:
             xinf = st.sidebar.number_input('Valor mínimo (xinf)', value=float(df[colunas_selecionadas].min().min()), key='xinf_2d')

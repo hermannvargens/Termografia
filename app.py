@@ -69,7 +69,7 @@ if uploaded_file is not None:
     largura_barra = st.sidebar.number_input('Largura da Barra', min_value=0.0, max_value=1.0, value=0.5)
     comprimento_barra = st.sidebar.number_input('Comprimento da Barra', min_value=0.0, max_value=10.0, value=1.0)
 
-    alpha = st.sidebar.number_input('Largura da Barra', min_value=0.0, max_value=1.0, value=0.5)
+    alpha = st.sidebar.number_input('Alpha', min_value=0.0, max_value=1.0, value=0.5)
 
     if st.sidebar.button('Gerar Histograma 3D'):
         fig = plotar_histogramas_3d(df[col1], df[col2], df[col3], bins, xinf, xsup, elev, azim, largura_barra, comprimento_barra, alpha)

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 # Função para plotar histogramas 3D
-def plotar_histogramas_3d(mapa1, mapa2, mapa3, bins, xinf, xsup, elev, azim, largura_barra, comprimento_barra, alpha):
+def plotar_histogramas_3d(mapa1, mapa2, mapa3, bins, xinf, xsup, elev, azim, largura_barra, comprimento_barra, alpha1, alpha2, alpha3):
     fig = plt.figure(figsize=(10, 6))
     ax = fig.add_subplot(111, projection='3d')
 
@@ -21,9 +21,9 @@ def plotar_histogramas_3d(mapa1, mapa2, mapa3, bins, xinf, xsup, elev, azim, lar
     x_col3 = bins_col3[:-1] + width / 2
 
     # Plota os histogramas 3D
-    ax.bar3d(x_col1, np.zeros_like(x_col1), np.zeros_like(x_col1), width*comprimento_barra, width, n_col1, color='blue', edgecolor=None, alpha=alpha, label=col1)
-    ax.bar3d(x_col2, np.ones_like(x_col2), np.zeros_like(x_col2), width*comprimento_barra, width, n_col2, color='yellow', edgecolor=None, alpha=alpha, label=col2)
-    ax.bar3d(x_col3, np.full_like(x_col3, 2), np.zeros_like(x_col3), width*comprimento_barra, width, n_col3, color='red', edgecolor=None, alpha=alpha, label=col3)
+    ax.bar3d(x_col1, np.zeros_like(x_col1), np.zeros_like(x_col1), width*comprimento_barra, width, n_col1, color='blue', edgecolor=None, alpha=alpha1, label=col1)
+    ax.bar3d(x_col2, np.ones_like(x_col2), np.zeros_like(x_col2), width*comprimento_barra, width, n_col2, color='yellow', edgecolor=None, alpha=alpha2, label=col2)
+    ax.bar3d(x_col3, np.full_like(x_col3, 2), np.zeros_like(x_col3), width*comprimento_barra, width, n_col3, color='red', edgecolor=None, alpha=alpha3, label=col3)
 
     # Etiquetas
     ax.set_xlabel('Temperatura')
@@ -69,8 +69,10 @@ if uploaded_file is not None:
     largura_barra = st.sidebar.number_input('Largura da Barra', min_value=0.0, max_value=1.0, value=0.5)
     comprimento_barra = st.sidebar.number_input('Comprimento da Barra', min_value=0.0, max_value=10.0, value=1.0)
 
-    alpha = st.sidebar.number_input('Alpha', min_value=0.0, max_value=1.0, value=0.5)
+    alpha1 = st.sidebar.number_input('Alpha 1', min_value=0.0, max_value=1.0, value=0.5)
+    alpha2 = st.sidebar.number_input('Alpha 2', min_value=0.0, max_value=1.0, value=0.5)
+    alpha3 = st.sidebar.number_input('Alpha 3', min_value=0.0, max_value=1.0, value=0.5)
 
     if st.sidebar.button('Gerar Histograma 3D'):
-        fig = plotar_histogramas_3d(df[col1], df[col2], df[col3], bins, xinf, xsup, elev, azim, largura_barra, comprimento_barra, alpha)
+        fig = plotar_histogramas_3d(df[col1], df[col2], df[col3], bins, xinf, xsup, elev, azim, largura_barra, comprimento_barra, alpha1, alpha2, alpha3)
         st.pyplot(fig)

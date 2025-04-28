@@ -63,5 +63,5 @@ if uploaded_file is not None:
     xsup = st.number_input('Valor máximo (xsup)', value=float(df[[col_etanol, col_agua, col_dec]].max().max()))
 
     if st.button('Gerar Histograma 3D'):
-        fig = plotar_histogramas_3d(df[col_etanol], df[col_agua], df[col_dec], bins, xinf, xsup)
+        fig = plotar_histogramas_3d(df[col_etanol], df[col_agua], df[col_dec], bins, xinf, xsup, elev, azim)
         st.pyplot(fig)

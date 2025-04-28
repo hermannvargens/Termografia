@@ -36,6 +36,9 @@ def plotar_histogramas_3d(mapa1, mapa2, mapa3, bins, xinf, xsup, elev, azim, lar
 
     ax.view_init(elev=elev, azim=azim)
 
+    # Adicionar a legenda
+    ax.legend([col1, col2, col3], loc='upper left', fontsize=10)
+
     # Retorna a figura para o Streamlit
     return fig
 

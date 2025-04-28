@@ -55,9 +55,9 @@ if uploaded_file is not None:
     col_agua = st.selectbox('Selecione a coluna para Água:', colunas)
     col_dec = st.selectbox('Selecione a coluna para DEC:', colunas)
 
-    bins = st.slider('Número de bins', min_value=5, max_value=100, value=20)
-    elev = st.slider('Elevação', min_value=0, max_value=360, value=45)
-    azim = st.slider('Azimetria', min_value=0, max_value=360, value=45)
+    bins = st.number_input('Número de bins', min_value=5, max_value=100, value=20)
+    elev = st.number_input('Elevação', min_value=0, max_value=360, value=45)
+    azim = st.number_input('Azimetria', min_value=0, max_value=360, value=45)
   
     xinf = st.number_input('Valor mínimo (xinf)', value=float(df[[col_etanol, col_agua, col_dec]].min().min()))
     xsup = st.number_input('Valor máximo (xsup)', value=float(df[[col_etanol, col_agua, col_dec]].max().max()))

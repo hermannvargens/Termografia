@@ -38,7 +38,7 @@ def plotar_histogramas_3d(mapa1, mapa2, mapa3, bins, xinf, xsup, elev, azim, lar
 def plotar_histogramas_2d(df, colunas, bins, xinf, xsup):
     fig, ax = plt.subplots(figsize=(10, 6))
     for coluna in colunas:
-        ax.hist(df[coluna], bins=bins, range=(xinf, xsup), alpha=0.5, label=coluna)
+        ax.hist(df[coluna], bins=bins, range=(xinf, xsup), alpha=0.5, label=coluna, edgecolor="black")
     ax.set_xlabel('Temperatura')
     ax.set_ylabel('Frequência')
     ax.legend()

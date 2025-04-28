@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 # Função para plotar histogramas 3D
-def plotar_histogramas_3d(mapa1, mapa2, mapa3, bins, xinf, xsup, elev, azim, largura_barra):
+def plotar_histogramas_3d(mapa1, mapa2, mapa3, bins, xinf, xsup, elev, azim, largura_barra, comprimento_barra):
     fig = plt.figure(figsize=(10, 6))
     ax = fig.add_subplot(111, projection='3d')
 
@@ -21,9 +21,9 @@ def plotar_histogramas_3d(mapa1, mapa2, mapa3, bins, xinf, xsup, elev, azim, lar
     x_col3 = bins_col3[:-1] + width / 2
 
     # Plota os histogramas 3D
-    ax.bar3d(x_col1, np.zeros_like(x_col1), np.zeros_like(x_col1), width*5, width, n_col1, color='blue', edgecolor='black', alpha=0.6, label=col1)
-    ax.bar3d(x_col2, np.ones_like(x_col2), np.zeros_like(x_col2), width, width, n_col2, color='yellow', edgecolor='black', alpha=0.6, label=col2)
-    ax.bar3d(x_col3, np.full_like(x_col3, 2), np.zeros_like(x_col3), width, width, n_col3, color='red', edgecolor='black', alpha=0.6, label=col3)
+    ax.bar3d(x_col1, np.zeros_like(x_col1), np.zeros_like(x_col1), width*comprimento_barra, width, n_col1, color='blue', edgecolor='black', alpha=0.6, label=col1)
+    ax.bar3d(x_col2, np.ones_like(x_col2), np.zeros_like(x_col2), width*comprimento_barra, width, n_col2, color='yellow', edgecolor='black', alpha=0.6, label=col2)
+    ax.bar3d(x_col3, np.full_like(x_col3, 2), np.zeros_like(x_col3), width*comprimento_barra, width, n_col3, color='red', edgecolor='black', alpha=0.6, label=col3)
 
     # Etiquetas
     ax.set_xlabel('Temperatura')
@@ -67,7 +67,8 @@ if uploaded_file is not None:
     xsup = st.sidebar.number_input('Valor máximo (xsup)', value=float(df[[col1, col2, col3]].max().max()))
 
     largura_barra = st.sidebar.number_input('Largura da Barra', min_value=0.0, max_value=1.0, value=0.5)
+    comprimento_barra = st.sidebar.number_input('Comprimento da Barra', min_value=0.0, max_value=5.0, value=1.0)
 
     if st.sidebar.button('Gerar Histograma 3D'):
-        fig = plotar_histogramas_3d(df[col1], df[col2], df[col3], bins, xinf, xsup, elev, azim, largura_barra)
+        fig = plotar_histogramas_3d(df[col1], df[col2], df[col3], bins, xinf, xsup, elev, azim, largura_barra, comprimento_barra)
         st.pyplot(fig)

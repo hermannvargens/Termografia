@@ -57,8 +57,8 @@ if uploaded_file is not None:
 
     # Ajuste dos parâmetros no sidebar
     bins = st.sidebar.number_input('Número de bins', min_value=5, max_value=100, value=20)
-    elev = st.sidebar.number_input('Elevação', min_value=0, max_value=360, value=45)
-    azim = st.sidebar.number_input('Azimute', min_value=0, max_value=360, value=45)
+    elev = st.sidebar.number_input('Elevação', min_value=0, max_value=360, value=30)
+    azim = st.sidebar.number_input('Azimute', min_value=0, max_value=360, value=60)
   
     xinf = st.sidebar.number_input('Valor mínimo (xinf)', value=float(df[[col_etanol, col_agua, col_dec]].min().min()))
     xsup = st.sidebar.number_input('Valor máximo (xsup)', value=float(df[[col_etanol, col_agua, col_dec]].max().max()))

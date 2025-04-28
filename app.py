@@ -49,21 +49,22 @@ uploaded_file = st.file_uploader("Escolha o arquivo CSV", type="csv")
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
 
-    # Selecionar as colunas
+    # Selecione as colunas no sidebar
     colunas = df.columns.tolist()
-    col_etanol = st.selectbox('Selecione a coluna para Etanol:', colunas)
-    col_agua = st.selectbox('Selecione a coluna para Água:', colunas)
-    col_dec = st.selectbox('Selecione a coluna para DEC:', colunas)
+    col_etanol = st.sidebar.selectbox('Selecione a coluna para Etanol:', colunas)
+    col_agua = st.sidebar.selectbox('Selecione a coluna para Água:', colunas)
+    col_dec = st.sidebar.selectbox('Selecione a coluna para DEC:', colunas)
 
-    bins = st.number_input('Número de bins', min_value=5, max_value=100, value=20)
-    elev = st.number_input('Elevação', min_value=0, max_value=360, value=45)
-    azim = st.number_input('Azimetria', min_value=0, max_value=360, value=45)
+    # Ajuste dos parâmetros no sidebar
+    bins = st.sidebar.number_input('Número de bins', min_value=5, max_value=100, value=20)
+    elev = st.sidebar.number_input('Elevação', min_value=0, max_value=360, value=45)
+    azim = st.sidebar.number_input('Azimetria', min_value=0, max_value=360, value=45)
   
-    xinf = st.number_input('Valor mínimo (xinf)', value=float(df[[col_etanol, col_agua, col_dec]].min().min()))
-    xsup = st.number_input('Valor máximo (xsup)', value=float(df[[col_etanol, col_agua, col_dec]].max().max()))
+    xinf = st.sidebar.number_input('Valor mínimo (xinf)', value=float(df[[col_etanol, col_agua, col_dec]].min().min()))
+    xsup = st.sidebar.number_input('Valor máximo (xsup)', value=float(df[[col_etanol, col_agua, col_dec]].max().max()))
 
-    largura_barra = st.number_input('Largura da Barra', min_value=0.0, max_value=1.0, value=0.5)
+    largura_barra = st.sidebar.number_input('Largura da Barra', min_value=0.0, max_value=1.0, value=0.5)
 
-    if st.button('Gerar Histograma 3D'):
+    if st.sidebar.button('Gerar Histograma 3D'):
         fig = plotar_histogramas_3d(df[col_etanol], df[col_agua], df[col_dec], bins, xinf, xsup, elev, azim, largura_barra)
         st.pyplot(fig)

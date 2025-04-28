@@ -62,7 +62,7 @@ if uploaded_file is not None:
     xinf = st.number_input('Valor mínimo (xinf)', value=float(df[[col_etanol, col_agua, col_dec]].min().min()))
     xsup = st.number_input('Valor máximo (xsup)', value=float(df[[col_etanol, col_agua, col_dec]].max().max()))
 
-    largura_barra = st.number_input('Largura da Barra', min_value=0, max_value=1, value=0.5)
+    largura_barra = st.number_input('Largura da Barra', min_value=0, max_value=1, value=float(0.5))
 
     if st.button('Gerar Histograma 3D'):
         fig = plotar_histogramas_3d(df[col_etanol], df[col_agua], df[col_dec], bins, xinf, xsup, elev, azim, largura_barra)

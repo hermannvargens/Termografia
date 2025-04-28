@@ -35,10 +35,10 @@ def plotar_histogramas_3d(mapa1, mapa2, mapa3, bins, xinf, xsup, elev, azim, lar
     return fig
 
 # Função para plotar gráficos 2D
-def plotar_histogramas_2d(df, colunas, bins, xinf, xsup):
+def plotar_histogramas_2d(df, colunas, bins, xinf, xsup, alpha):
     fig, ax = plt.subplots(figsize=(10, 6))
     for coluna in colunas:
-        ax.hist(df[coluna], bins=bins, range=(xinf, xsup), alpha=0.5, label=coluna, edgecolor="black")
+        ax.hist(df[coluna], bins=bins, range=(xinf, xsup), alpha=alpha, label=coluna, edgecolor="black")
     ax.set_xlabel('Temperatura')
     ax.set_ylabel('Frequência')
     ax.legend()
@@ -84,6 +84,7 @@ if uploaded_file is not None:
 
         colunas_selecionadas = st.sidebar.multiselect('Selecione as colunas:', colunas)
         bins = st.sidebar.number_input('Número de bins', min_value=5, max_value=100, value=20, key='bins_2d')
+        alpha = st.sidebar.number_input('Alpha', min_value=0.0, max_value=1.0, value=0.5, key='alpha')
 
         if colunas_selecionadas:
             xinf = st.sidebar.number_input('Valor mínimo (xinf)', value=float(df[colunas_selecionadas].min().min()), key='xinf_2d')
